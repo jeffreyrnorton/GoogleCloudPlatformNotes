@@ -63,9 +63,23 @@ Deep networks already can be very computationally expensive to train, so there's
 
 Pruning describes a set of techniques to trim network size (by nodes not layers) to improve computational performance and sometimes also resolution performance. The gist of these techniques is removing nodes from the network during training by identifying those nodes which, if removed from the network, would not noticeably affect network performance (i.e., resolution of the data). 
 
-Even without using a formal pruning technique, you can get a rough idea of which nodes are not important by looking at your weight matrix after training; the nodes with weights very close to zero--it's the nodes on either end of those weights that are often removed during pruning.) Obviously, if you use a pruning algorithm during training then begin with a network configuration that is more likely to have excess (i.e., *prunable*) nodes--in other words, when deciding on a network architecture, err on the side of more neurons, if you add a pruning step.
+Even without using a formal pruning technique, you can get a rough idea of which nodes are not important by looking at your weight matrix after training; the nodes with weights very close to zero--it's the nodes on either end of those weights that are often removed during pruning.) Obviously, if you use a pruning algorithm during training then begin with a network configuration that is more likely to have excess (i.e., *prunable*) nodes--in other words, when deciding on a network architecture, err on the side of more neurons, if you add a pruning step. Put another way, by applying a pruning algorithm to your network during training, you can approach optimal network configuration.
 
-Put another way, by applying a pruning algorithm to yournetwork during training, you can approach optimal network configuration;whether you can do that in a single "up-front" (such as agenetic-algorithm-based algorithm) I don't know, though I do know that for now,this two-step optimization is more common.
+Another approach that has been studied since the 1990s is to apply a genetic algorithm to optimize the network topology.  It is still an active area of study - see the paper by Idrissi et al.
+
+### Example
+
+The TensorFlow playground provides the difficult spiral data model which we can attempt to solve.  First, we show underfitting. We can see that while the convergence is smooth, it is slow and the limited number of neurons in the hidden layer cannot capture all the features.
+
+![](Spiral_Underfit.jpg)
+
+Erring to the other side, we see that while this configuration with the same number of neurons as the input layer appears to converge, we also note that the convergence is slow.  We see that the convergence is a "bumpy trip" and finally, if we look at the fifth node down, we can see that it appears to be capturing very little of the feature.
+
+![](Spiral_Overfit.jpg)
+
+If we look at the nodes in the network below, it appears that the top node has very little influence in the model.  Yet, if we run four nodes, we get terrible convergence - that is, a bumpy ride to minimization.  However, with five nodes (even with the top one appearing to provide much in the way of feature recognition) actually captures the features in less than have of the epochs.
+
+![](Spiral_JustRight.jpg)
 
 ### References
 
@@ -74,6 +88,8 @@ Cross Validated, "How to choose the number of hidden layers and nodes in a feedf
 Cross Validated, "Why are neural networks becoming deeper, but not wider?", July 13, 2016, https://stats.stackexchange.com/questions/222883/why-are-neural-networks-becoming-deeper-but-not-wider
 
 Heaton Research, "The Number of Hidden Layers", June 1, 2017, http://www.heatonresearch.com/2017/06/01/hidden-layers.html
+
+Idrissi, J, et al, Genetic Algorithm for Neural Network Architecture Optimization, 2016, https://www.researchgate.net/profile/Mohammed_Amine_Janati_Idrissi/publication/309694276_Genetic_algorithm_for_neural_network_architecture_optimization/links/59f9f7dbaca272026f6ecab8/Genetic-algorithm-for-neural-network-architecture-optimization.pdf
 
 Sarle, W.S., comp.ai.neural-nets FAQ, 2002, http://www.faqs.org/faqs/ai-faq/neural-nets/part1/preamble.html
 
