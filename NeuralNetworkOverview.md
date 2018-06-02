@@ -71,15 +71,15 @@ Another approach that has been studied since the 1990s is to apply a genetic alg
 
 The TensorFlow playground provides the difficult spiral data model which we can attempt to solve.  First, we show underfitting. We can see that while the convergence is smooth, it is slow and the limited number of neurons in the hidden layer cannot capture all the features.
 
-![](Spiral_Underfit.jpg)
+![](Images/Spiral_Underfit.jpg)
 
 Erring to the other side, we see that while this configuration with the same number of neurons as the input layer appears to converge, we also note that the convergence is slow.  We see that the convergence is a "bumpy trip" and finally, if we look at the fifth node down, we can see that it appears to be capturing very little of the feature.
 
-![](Spiral_Overfit.jpg)
+![](Images/Spiral_Overfit.jpg)
 
 If we look at the nodes in the network below, it appears that the top node has very little influence in the model.  Yet, if we run four nodes, we get terrible convergence - that is, a bumpy ride to minimization.  However, with five nodes (even with the top one appearing to provide much in the way of feature recognition) actually captures the features in less than have of the epochs.
 
-![](Spiral_JustRight.jpg)
+![](Images/Spiral_JustRight.jpg)
 
 ### References
 
